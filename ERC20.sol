@@ -17,11 +17,11 @@ contract ERC20 {
 
     function transfer(address from, address to, uint256 amount) virtual public {
         require(balances[from] > amount);
-        require(allowed[msg.sender][from] > amount);
+        require(allowed[from][msg.sender] > amount);
 
         balances[to] += amount;
         balances[from] -= amount;
-        allowed[msg.sender][from] -= amount;
+        allowed[from][msg.sender] -= amount;
 
         emit Transfer(from, to, amount);
     }
