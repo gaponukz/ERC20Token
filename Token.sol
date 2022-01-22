@@ -1,29 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.4;
-
-library SafeMath {
-    function add(uint256 a, uint256 b) public pure returns (uint256) {
-        uint256 c = a + b;
-        require(c >= a);
-        return c;
-    }
- 
-    function sub(uint256 a, uint256 b) public pure returns (uint256) {
-        require(b <= a);
-        return a - b;
-    }
- 
-    function mul(uint256 a, uint256 b) public pure returns (uint256) {
-        uint256 c = a * b;
-        require(a == 0 || c / a == b);
-        return c;
-    }
- 
-    function div(uint256 a, uint256 b) public pure returns (uint256) {
-        require(b > 0);
-        return a / b;
-    }
-}
+import "https://github.com/gaponukz/SolSafeMath/blob/main/SafeMath.sol";
  
 contract Token {
     using SafeMath for uint256;
@@ -45,7 +22,7 @@ contract Token {
     }
  
     function transfer(address to, uint tokens) public returns (bool) {
-        balances[msg.sender] = balances[msg.sender].add(tokens);
+        balances[msg.sender] = balances[msg.sender].sub(tokens);
         balances[to] = balances[to].add(tokens);
         emit Transfer(msg.sender, to, tokens);
 
@@ -55,7 +32,7 @@ contract Token {
     function approve(address spender, uint tokens) public returns (bool) {
         allowed[msg.sender][spender] = tokens;
         emit Approval(msg.sender, spender, tokens);
-        
+
         return true;
     }
  
