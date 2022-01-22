@@ -15,7 +15,14 @@ contract ERC20 {
         allowed[msg.sender][msg.sender] = _totalSupply;
     }
 
-    function transfer(address from, address to, uint256 amount) virtual public {
+    function transfer(address _address, uint256 amount) public {
+        balances[msg.sender] -= amount;
+        balances[_address] += amount;
+
+        emit Transfer(msg.sender, _address, amount);
+    }
+
+    function transferFrom(address from, address to, uint256 amount) virtual public {
         require(balances[from] > amount);
         require(allowed[from][msg.sender] > amount);
 
