@@ -1,4 +1,4 @@
-# ERC20 standard  Token
+# ERC20 standar  Token
 ERC20 standard defines a set of functions to be implemented by all ERC20 tokens so as to allow integration with other contracts, wallets, or marketplaces. This set of functions is rather short and basic.
 ```sol
 function totalSupply() public view returns (uint256);
